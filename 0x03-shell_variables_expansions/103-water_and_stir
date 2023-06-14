@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "The sum of WATER and STIR is: $(echo "ibase=$water_base; $WATER" | bc) + $(echo "ibase=$stir_base; $STIR" | bc) | bc -q | tr -d '\' | base -w $bestchol_base"
+printf -v sum_bestchol "%.$((bestchol_base-1))f" "$(echo "ibase=$water_base; $WATER + $stir_base; $STIR" | bc)"
+echo "The sum of WATER and STIR is: ${sum_bestchol%%.*}"
