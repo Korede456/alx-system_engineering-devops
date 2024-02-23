@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Find the process ID (PID) of the "7-highlander" process
+pid=$(pgrep -f "7-highlander")
+
+if [ -n "$pid" ]; then
+    pkill -f "7-highlander"
+fi
+
