@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# Run the "7-highlander" script in terminal #0
+# Sends a sigma
+
 ./7-highlander
