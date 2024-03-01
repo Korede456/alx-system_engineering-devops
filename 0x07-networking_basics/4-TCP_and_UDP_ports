@@ -1,14 +1,25 @@
 #!/usr/bin/env bash
-# display listening ports
-
+# Display all listening ports
 echo "Active Internet connections (only servers)"
 echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
 
-netstat -tuln | awk '$1 ~ /^tcp/ {print $1 "\t" $2 "\t" $4 "\t\t" $5 "\t\t" $6 "\t" $7}' | sed 's/:::/[::]/g'
+# Display TCP listening ports with PID/Program name
+netstat -tuln | grep '^tcp' | awk '{print $1, $4, $NF}' | while read proto recvq sendq local foreign state; do
+    pid=$(echo "$state" | awk -F'/' '{print $1}')
+    program=$(echo "$state" | awk -F'/' '{print $2}')
+    echo "$proto $recvq $sendq $local $foreign $pid/$program"
+done
 
-netstat -uln | awk '$1 ~ /^udp/ {print $1 "\t" $2 "\t" $4 "\t\t" $5 "\t\t\t" $6}' | sed 's/:::/[::]/g'
+# Display UDP listening ports with PID/Program name
+netstat -uln | grep '^udp' | awk '{print $1, $4, $NF}' | while read proto recvq sendq local foreign state; do
+    pid=$(echo "$state" | awk -F'/' '{print $1}')
+    program=$(echo "$state" | awk -F'/' '{print $2}')
+    echo "$proto $recvq $sendq $local $foreign $pid/$program"
+done
 
 echo "Active UNIX domain sockets (only servers)"
 echo "Proto RefCnt Flags       Type       State         I-Node   PID/Program name    Path"
 
-netstat -xln | awk '$1 ~ /^unix/ {print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $5 "\t" $6 "\t\t" $7}'
+# Display UNIX domain sockets with PID/Program name
+netstat -lx | grep '^unix' | awk '{print $1, $2, $3, $4, $5, $6, $7}'
+
