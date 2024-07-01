@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env/bash
 
 SERVER_ADDRESS="435024-web-01"
 
