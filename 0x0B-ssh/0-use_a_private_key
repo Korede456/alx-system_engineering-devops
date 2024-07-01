@@ -1,5 +1,3 @@
 #!/usr/bin/env/bash
 
-SERVER_ADDRESS="435024-web-01"
-
-ssh -i ~/.ssh/school ubuntu@$SERVER_ADDRESS
+ssh -i ~/.ssh/school ubuntu@35.175.130.64
