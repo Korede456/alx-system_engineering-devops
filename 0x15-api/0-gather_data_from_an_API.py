@@ -27,7 +27,7 @@ if __name__ == "__main__":
                 txt = "Employee {name} is done with tasks({cmpt}/{numb}):"
                 print(txt.format(name=name, cmpt=cmpt, numb=numb))
                 for item in todos:
-                    if(item['completed']):
+                    if (item['completed']):
                         print("\t {title}".format(title=item['title']))
         else:
             print("Employee Not exist")
